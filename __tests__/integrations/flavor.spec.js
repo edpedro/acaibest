@@ -36,7 +36,7 @@ describe('Flavor', () => {
       }),
     });
   });
-  it('shyould list all flavors', async () => {
+  it('should list all flavors', async () => {
     const response = await request(app).get('/flavors').send();
 
     expect(response.status).toBe(200);
