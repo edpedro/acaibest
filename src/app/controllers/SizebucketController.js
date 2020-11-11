@@ -1,11 +1,11 @@
-const Personalize = require('../models/Personalize');
+const Sizebucket = require('../models/Sizebucket');
 const Flavor = require('../models/Flavor');
 
 module.exports = {
   async index(req, res) {
-    const personalize = await Personalize.findAll({});
+    const sizebucket = await Sizebucket.findAll({});
 
-    return res.status(200).json(personalize);
+    return res.status(200).json(sizebucket);
   },
   async store(req, res) {
     const { flavor_id } = req.params;
@@ -25,13 +25,13 @@ module.exports = {
         return res.status(400).json({ error: 'please fill in price' });
       }
 
-      const [personalize] = await Personalize.findOrCreate({
+      const [sizebucket] = await Sizebucket.findOrCreate({
         where: { name, price },
       });
 
-      await flavor.addPersonalize(personalize);
+      await flavor.addSizebucket(sizebucket);
 
-      return res.status(201).json(personalize);
+      return res.status(201).json(sizebucket);
     } catch (error) {
       return res
         .status(404)
@@ -39,11 +39,11 @@ module.exports = {
     }
   },
   async update(req, res) {
-    const { personalize_id } = req.params;
+    const { sizebucket_id } = req.params;
     const { name } = req.body;
 
     try {
-      const response = await Personalize.findByPk(personalize_id);
+      const response = await Sizebucket.findByPk(sizebucket_id);
 
       if (!response) {
         return res.status(400).json({ error: 'name not found' });
@@ -55,12 +55,12 @@ module.exports = {
           .json({ error: 'please fill in the name to update' });
       }
 
-      const pesonalize = await Personalize.update(
+      const sizebucket = await Sizebucket.update(
         { name },
-        { where: { id: personalize_id } },
+        { where: { id: sizebucket_id } },
       );
 
-      return res.status(200).json(pesonalize);
+      return res.status(200).json(sizebucket);
     } catch (error) {
       return res
         .status(404)
@@ -83,16 +83,17 @@ module.exports = {
           .json({ error: 'please fill in the name to delete' });
       }
 
-      const personalize = await Personalize.findOne({
+      const sizebucket = await Sizebucket.findOne({
         where: { name },
       });
 
-      await Personalize.destroy({
+      await Sizebucket.destroy({
         where: {
           name,
         },
       });
-      await flavor.removePersonalize(personalize);
+
+      await flavor.removeSizebucket(sizebucket);
 
       return res.status(200).json();
     } catch (error) {
