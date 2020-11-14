@@ -4,8 +4,14 @@ const FlavorController = require('./app/controllers/FlavorController');
 const PersonalizeController = require('./app/controllers/PersonalizeController');
 const BucketController = require('./app/controllers/BucketController');
 const SizebucketController = require('./app/controllers/SizebucketController');
+const OrderController = require('./app/controllers/OrderController');
 
 const routes = express.Router();
+
+routes.get('/orders', OrderController.index);
+routes.get('/orders/:number_order', OrderController.showId);
+routes.delete('/orders/:number_order', OrderController.delete);
+routes.post('/orders', OrderController.store);
 
 routes.get('/flavors', FlavorController.index);
 routes.post('/flavors', FlavorController.store);

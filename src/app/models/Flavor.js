@@ -5,7 +5,7 @@ class Flavor extends Model {
     super.init(
       {
         name: DataTypes.STRING,
-        price: DataTypes.DECIMAL,
+        price: DataTypes.FLOAT,
       },
       {
         sequelize,
