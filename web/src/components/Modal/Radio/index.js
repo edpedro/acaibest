@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 
 import Cards from "../Card";
+import Checkboxes from "../Checkbox";
 
 const AcaiRadio = withStyles({
   root: {
@@ -17,39 +18,71 @@ const AcaiRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-export default function RadioButtonsGroup(props) {
-  const [value, setValue] = useState("female");
+export default function RadioButtonsGroup({ buckets, onChange, data }) {
+  const [flavor, setFlavor] = useState("");
+  
+  const handleChangeFlavor = (event) => {  
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+    const idFlavor = buckets.filter((bucket) => {
+      return bucket.name === event.target.value;
+    });
+    setFlavor(idFlavor[0].id);
+
+    onChange({ ...data, name: event.target.value });
   };
-
+  const handleChangeSizebucket = (event) => {
+    onChange({
+      ...data,
+      sizebucket: event.target.value,
+    });
+  };
+ 
   return (
     <>
       <Container maxWidth="sm">
-        <Cards />
+        <Cards title="Selecione o sabor" />
         <RadioGroup
-          aria-label="gender"
-          name="gender1"
-          value={value}
-          onChange={handleChange}
+          aria-label="bucket1"
+          name="bucket1"
+          onChange={handleChangeFlavor}
         >
-          <FormControlLabel
-            value="Morango"
-            control={<AcaiRadio />}
-            label={props.name1}
-          />
-          <FormControlLabel
-            value="Banana"
-            control={<AcaiRadio />}
-            label={props.name2}
-          />
-          <FormControlLabel
-            value="Kiwi"
-            control={<AcaiRadio />}
-            label={props.name3}
-          />
+          {buckets?.map((bucket) => (
+            <FormControlLabel
+              value={bucket.name}
+              control={<AcaiRadio />}
+              label={bucket.name}             
+            />
+          ))}
         </RadioGroup>
+        {flavor && (
+          <RadioGroup
+            aria-label="sizebuck"
+            name="sizebuck1"
+            onChange={handleChangeSizebucket}
+          >
+            <Cards title="Selecione o tamanho" />
+            {buckets?.map((bucket) =>
+              bucket.sizebuckets
+                .filter(
+                  (sizebucket) =>
+                    sizebucket.flavors_sizebuckets.flavor_id === flavor
+                )
+                .map((sizebuck) => (
+                  <FormControlLabel
+                    value={sizebuck.name}
+                    control={<AcaiRadio />}
+                    label={sizebuck.name}                   
+                  />
+                ))
+            )}
+          </RadioGroup>
+        )}
+        <Checkboxes
+          onChange={onChange}
+          data={data}
+          flavor={flavor}
+          buckets={buckets}        
+        />
       </Container>
     </>
   );

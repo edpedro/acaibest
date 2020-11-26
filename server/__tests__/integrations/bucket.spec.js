@@ -4,13 +4,13 @@ const app = require('../../src/app');
 
 const truncate = require('../utils/trucante');
 
-describe('Bucket', () => {
+describe('Buckets', () => {
   beforeEach(async () => {
     await truncate();
   });
 
   it('should list all bucket', async () => {
-    const response = await request(app).get('/bucket').send();
+    const response = await request(app).get('/buckets').send();
 
     expect(response.status).toBe(200);
   });

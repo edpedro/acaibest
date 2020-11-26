@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Cards() {
+export default function Cards(props) {
   const classes = useStyles();
 
   return (
@@ -26,7 +26,7 @@ export default function Cards() {
       <Card>
         <CardContent className={classes.cardConten}>
           <Typography variant="subtitle2" component="h2">
-            Selecione o sabor
+            {props.title}
             <strong> 0 de 1</strong>
           </Typography>
           <Typography variant="subtitle2" component="h2">

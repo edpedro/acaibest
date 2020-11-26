@@ -1,15 +1,20 @@
 import React from "react";
+import { Provider } from "react-redux";
 
 import Routes from "./routes";
 import Header from "./components/Header";
 
-import "./App.css"
+import store from "./store";
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Routes />
+      <Provider store={store}>
+        <Header />
+        <Routes />
+      </Provider>
     </div>
   );
 }

@@ -21,7 +21,7 @@ routes.post('/persons/:flavor_id', PersonalizeController.store);
 routes.put('/persons/:personalize_id', PersonalizeController.update);
 routes.delete('/persons/:flavor_id', PersonalizeController.delete);
 
-routes.get('/bucket', BucketController.index);
+routes.get('/buckets', BucketController.index);
 
 routes.get('/sizebucket', SizebucketController.index);
 routes.post('/sizebucket/:flavor_id', SizebucketController.store);

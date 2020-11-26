@@ -3,7 +3,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 
 import Cards from "../Card";
@@ -18,33 +17,46 @@ const AcaiCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-function Checkboxes() {
+function Checkboxes({ onChange, data, flavor, buckets }) {
+  const handleChangePeronalize = (event) => {
+    let newArray = [...data.personalize, event.target.value];
+    if (data.personalize.includes(event.target.value)) {
+      newArray = newArray.filter((person) => person !== event.target.value);
+    }
+    onChange({
+      ...data,
+      personalize: newArray,
+    });   
+  };
+
   return (
-    <Container maxWidth="sm">
-      <Cards />
-      <FormControl component="fieldset">
-        <FormGroup aria-label="position" column>
-          <FormControlLabel
-            value="end"
-            control={<AcaiCheckbox color="primary" />}
-            label="Granola"
-            labelPlacement="Granola"
-          />
-          <FormControlLabel
-            value="end"
-            control={<AcaiCheckbox color="primary" />}
-            label="Paçoca"
-            labelPlacement="Paçoca"
-          />
-          <FormControlLabel
-            value="end"
-            control={<AcaiCheckbox color="primary" />}
-            label="Leite ninho"
-            labelPlacement="Leite ninho"
-          />
-        </FormGroup>
-      </FormControl>
-    </Container>
+    <>
+      {flavor && (
+        <div>
+          <Cards title="Personalize seu pedido" />
+          <FormControl component="fieldset">
+            <FormGroup aria-label="position" column>
+              {buckets?.map((bucket) =>
+                bucket.personalizes
+                  .filter(
+                    (personalize) =>
+                      personalize.flavors_personalizes.flavor_id === flavor
+                  )
+                  .map((person) => (
+                    <FormControlLabel
+                      value={person.name}
+                      control={<AcaiCheckbox />}
+                      label={person.name}
+                      labelPlacement={person.name}
+                      onChange={handleChangePeronalize}
+                    />
+                  ))
+              )}
+            </FormGroup>
+          </FormControl>
+        </div>
+      )}
+    </>
   );
 }
 export default Checkboxes;

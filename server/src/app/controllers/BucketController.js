@@ -3,21 +3,16 @@ const Flavor = require('../models/Flavor');
 module.exports = {
   async index(req, res) {
     const flavor = await Flavor.findAll({
-      attributes: ['name', 'price'],
       include: [
         {
           association: 'personalizes',
-          attributes: ['name', 'price'],
-          through: {
-            attributes: [],
-          },
+          attributes: ['id', 'name', 'price'],
+          through: {},
         },
         {
           association: 'sizebuckets',
           attributes: ['name', 'price'],
-          through: {
-            attributes: [],
-          },
+          through: {},
         },
       ],
     });

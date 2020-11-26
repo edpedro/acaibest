@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -11,7 +12,8 @@ import ButtonOrder from "../Buttons";
 import ImageAvatar from "../Avatar";
 import imgAcai from "../../assets/balde1.jpg";
 import RadioIcon from "./Radio";
-import Checkboxes from "./Checkbox";
+
+import { Getbucket } from "../../store/modules/bucket/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20%",
   },
   modalButton: {
-    display: "flex",  
+    display: "flex",
     flexDirection: "column",
   },
   button: {
@@ -45,12 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
   price: {
     fontWeight: "700!important",
-    fontSize: "1.1rem",   
+    fontSize: "1.1rem",
   },
   priceNumber: {
     fontSize: "1.6rem",
   },
-  description:{
+  description: {
     display: "flex",
     justifyContent: "flex-start",
     flexDirection: "column",
@@ -59,7 +61,21 @@ const useStyles = makeStyles((theme) => ({
 
 function Modal() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { buckets } = useSelector((state) => state.bucket);
+  const [data, setData] = useState({
+    name: "",
+    personalize: [],
+    sizebucket: [],
+    price_total: ""
+  });
+  console.log(data);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(Getbucket());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -82,18 +98,20 @@ function Modal() {
             </DialogTitle>
           </DialogTitle>
           <form noValidate className={classes.form}>
-            <RadioIcon name1="Morango" name2="Banana" name3="Kiwi" />
-            <RadioIcon  name1="Pequeno (300ml)" name2="Médio (500ml)" name3="Grande (700ml)" />
-            <Checkboxes />
+            <RadioIcon
+              buckets={buckets}
+              onChange={(value) => setData(value)}
+              data={data}
+            />          
           </form>
         </DialogContent>
         <DialogActions className={classes.modalButton}>
           <DialogActions className={classes.description}>
             <Typography variant="subtitle1" component="p">
-              Morango, Pequeno (300ml)
+              {data.name}, {data.sizebucket}
             </Typography>
             <Typography variant="body2" component="p">
-            Granola (R$ 0,00), Paçoca (R$ 3,00), Leite ninho (R$ 3,00)
+              {data.personalize.join()}
             </Typography>
             <Typography variant="h4" component="p" className={classes.price}>
               R$ <span className={classes.priceNumber}>10</span>,00
