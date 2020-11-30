@@ -15,16 +15,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      price: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
       personalize: {
-        type: Sequelize.ARRAY(Sequelize.JSON),
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
       },
       sizebucket: {
-        type: Sequelize.ARRAY(Sequelize.JSON),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       price_total: {

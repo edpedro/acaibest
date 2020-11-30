@@ -30,7 +30,7 @@ export default function Cards(props) {
             <strong> 0 de 1</strong>
           </Typography>
           <Typography variant="subtitle2" component="h2">
-            Obrigatório
+            {props.required}
           </Typography>
         </CardContent>
       </Card>

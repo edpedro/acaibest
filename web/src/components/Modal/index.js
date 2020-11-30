@@ -14,6 +14,7 @@ import imgAcai from "../../assets/balde1.jpg";
 import RadioIcon from "./Radio";
 
 import { Getbucket } from "../../store/modules/bucket/actions";
+import { OrderRegister } from "../../store/modules/order/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,19 +65,16 @@ function Modal() {
   const dispatch = useDispatch();
   const { buckets } = useSelector((state) => state.bucket);
   const [data, setData] = useState({
+    number_order: Math.floor(1000 + Math.random() * 9000),
     name: "",
     personalize: [],
     sizebucket: [],
-    price_total: ""
+    price_flavor: 0,
+    price_sizeBucket: 0,
+    price_person: 0,    
   });
-  console.log(data);
+
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    dispatch(Getbucket());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -84,47 +82,68 @@ function Modal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(Getbucket());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  
+  function handleSubmint(event) {
+    event.preventDefault();
+
+    dispatch(OrderRegister(data));
+  }
   return (
     <>
       <ButtonOrder handleClickOpen={handleClickOpen} title="Realizar pedido" />
       <Dialog open={open} onClose={handleClose} className={classes.root}>
-        <DialogContent className={classes.formControl}>
-          <DialogTitle className={classes.title}>
-            <Typography variant="h4" gutterBottom>
-              Adicionar Pedido
-            </Typography>
-            <DialogTitle className={classes.img}>
-              <ImageAvatar width={14} height={14} image={imgAcai} />
+        <form noValidate onSubmit={handleSubmint}>
+          <DialogContent className={classes.formControl}>
+            <DialogTitle className={classes.title}>
+              <Typography variant="h4" gutterBottom>
+                Adicionar Pedido
+              </Typography>
+              <DialogTitle className={classes.img}>
+                <ImageAvatar width={14} height={14} image={imgAcai} />
+              </DialogTitle>
             </DialogTitle>
-          </DialogTitle>
-          <form noValidate className={classes.form}>
+
             <RadioIcon
               buckets={buckets}
               onChange={(value) => setData(value)}
               data={data}
-            />          
-          </form>
-        </DialogContent>
-        <DialogActions className={classes.modalButton}>
-          <DialogActions className={classes.description}>
-            <Typography variant="subtitle1" component="p">
-              {data.name}, {data.sizebucket}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {data.personalize.join()}
-            </Typography>
-            <Typography variant="h4" component="p" className={classes.price}>
-              R$ <span className={classes.priceNumber}>10</span>,00
-            </Typography>
+            />
+          </DialogContent>
+          <DialogActions className={classes.modalButton}>
+            <DialogActions className={classes.description}>
+              <Typography variant="subtitle1" component="p">
+                {data.name}, {data.sizebucket}
+              </Typography>
+              <Typography variant="body2" component="p">
+                {data.personalize.join()}
+              </Typography>
+              <Typography variant="h4" component="p" className={classes.price}>
+                R${" "}
+                <span className={classes.priceNumber}>
+                  {data.price_flavor +
+                    data.price_person +
+                    data.price_sizeBucket}
+                </span>
+                ,00
+              </Typography>
+            </DialogActions>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              type="submit"
+              onClick={handleClose}
+            >
+              Finalizar Pedido
+            </Button>
           </DialogActions>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Finalizar Pedido
-          </Button>
-        </DialogActions>
+        </form>
       </Dialog>
     </>
   );

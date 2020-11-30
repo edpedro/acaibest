@@ -19,48 +19,45 @@ const AcaiRadio = withStyles({
 })((props) => <Radio color="default" {...props} />);
 
 export default function RadioButtonsGroup({ buckets, onChange, data }) {
-  const [flavor, setFlavor] = useState("");
-  
-  const handleChangeFlavor = (event) => {  
+  const [flavor, setFlavor] = useState();
 
-    const idFlavor = buckets.filter((bucket) => {
-      return bucket.name === event.target.value;
+  const handleChangeFlavor = (props) => (event) => {
+    setFlavor(props.id);
+    onChange({
+      ...data,
+      name: event.target.value,
+      price_flavor: props.price,
+      personalize: [],
+      price_person: 0,
     });
-    setFlavor(idFlavor[0].id);
-
-    onChange({ ...data, name: event.target.value });
   };
-  const handleChangeSizebucket = (event) => {
+
+  const handleChangeSizebucket = (props) => (event) => {
     onChange({
       ...data,
       sizebucket: event.target.value,
+      price_sizeBucket: props.price,
     });
   };
- 
+
   return (
     <>
       <Container maxWidth="sm">
-        <Cards title="Selecione o sabor" />
-        <RadioGroup
-          aria-label="bucket1"
-          name="bucket1"
-          onChange={handleChangeFlavor}
-        >
+        <Cards title="Selecione o sabor" required="Obrigatório" />
+        <RadioGroup aria-label="bucket1" name="bucket1">
           {buckets?.map((bucket) => (
             <FormControlLabel
               value={bucket.name}
               control={<AcaiRadio />}
-              label={bucket.name}             
+              label={bucket.name}
+              key={bucket.id}
+              onChange={handleChangeFlavor(bucket)}
             />
           ))}
         </RadioGroup>
         {flavor && (
-          <RadioGroup
-            aria-label="sizebuck"
-            name="sizebuck1"
-            onChange={handleChangeSizebucket}
-          >
-            <Cards title="Selecione o tamanho" />
+          <RadioGroup aria-label="sizebuck" name="sizebuck1">
+            <Cards title="Selecione o tamanho" required="Obrigatório" />
             {buckets?.map((bucket) =>
               bucket.sizebuckets
                 .filter(
@@ -71,7 +68,9 @@ export default function RadioButtonsGroup({ buckets, onChange, data }) {
                   <FormControlLabel
                     value={sizebuck.name}
                     control={<AcaiRadio />}
-                    label={sizebuck.name}                   
+                    label={sizebuck.name}
+                    key={sizebuck.id}
+                    onChange={handleChangeSizebucket(sizebuck)}
                   />
                 ))
             )}
@@ -81,7 +80,7 @@ export default function RadioButtonsGroup({ buckets, onChange, data }) {
           onChange={onChange}
           data={data}
           flavor={flavor}
-          buckets={buckets}        
+          buckets={buckets}
         />
       </Container>
     </>

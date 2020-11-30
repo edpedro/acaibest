@@ -23,9 +23,8 @@ factory.define('Flavor', Flavor, {
 factory.define('Order', Order, {
   number_order: faker.random.number(),
   name: faker.name.findName(),
-  price: faker.commerce.price(),
   personalize: faker.random.arrayElements(),
-  sizebucket: faker.random.arrayElements(),
+  sizebucket: faker.name.findName(),
   price_total: faker.commerce.price(),
 });
 

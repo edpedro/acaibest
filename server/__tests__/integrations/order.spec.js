@@ -60,48 +60,6 @@ describe('Personalize', () => {
       }),
     );
   });
-  it('should not register order without name', async () => {
-    const price = null;
-    const order = await factory.attrs('Order', {
-      price,
-    });
-    const response = await request(app).post('/orders').send(order);
-
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchObject(
-      expect.objectContaining({
-        error: 'price not found',
-      }),
-    );
-  });
-  it('should not register order without price', async () => {
-    const price = null;
-    const order = await factory.attrs('Order', {
-      price,
-    });
-    const response = await request(app).post('/orders').send(order);
-
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchObject(
-      expect.objectContaining({
-        error: 'price not found',
-      }),
-    );
-  });
-  it('should not register order without price_total', async () => {
-    const price_total = null;
-    const order = await factory.attrs('Order', {
-      price_total,
-    });
-    const response = await request(app).post('/orders').send(order);
-
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchObject(
-      expect.objectContaining({
-        error: 'price_total not found',
-      }),
-    );
-  });
   it('should not register order without sizebucket', async () => {
     const sizebucket = null;
     const order = await factory.attrs('Order', {

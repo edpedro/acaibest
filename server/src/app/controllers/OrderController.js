@@ -11,10 +11,11 @@ module.exports = {
       const {
         number_order,
         name,
-        price,
         personalize,
         sizebucket,
-        price_total,
+        price_flavor,
+        price_sizeBucket,
+        price_person,
       } = req.body;
 
       const checkNumerOrder = await Order.findOne({ where: { number_order } });
@@ -29,23 +30,17 @@ module.exports = {
       if (!name) {
         return res.status(400).json({ error: 'name not found' });
       }
-      if (!price) {
-        return res.status(400).json({ error: 'price not found' });
-      }
-      if (!price_total) {
-        return res.status(400).json({ error: 'price_total not found' });
-      }
       if (!sizebucket) {
         return res.status(400).json({ error: 'sizebucket not found' });
       }
+      const newPrice_total = price_flavor + price_sizeBucket + price_person;
 
       const order = await Order.create({
         number_order,
         name,
-        price,
         personalize,
         sizebucket,
-        price_total,
+        price_total: newPrice_total,
       });
 
       return res.status(201).json(order);
