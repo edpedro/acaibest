@@ -95,7 +95,7 @@ function Modal() {
     dispatch(OrderRegister(data));
   }
   return (
-    <>
+    <>      
       <ButtonOrder handleClickOpen={handleClickOpen} title="Realizar pedido" />
       <Dialog open={open} onClose={handleClose} className={classes.root}>
         <form noValidate onSubmit={handleSubmint}>

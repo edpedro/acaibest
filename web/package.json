@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "history": "^5.0.0",
     "immer": "^8.0.0",
+    "material-ui-popup-state": "^1.7.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-notifications-component": "^3.0.3",

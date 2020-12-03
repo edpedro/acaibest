@@ -7,7 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 
 import imgAcai from "../../assets/balde2.jpg";
-import ImageAvatar from '../Avatar'
+import ImageAvatar from "../Avatar";
+import Detail from "./Detail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignSelf: "flex-start",
     marginRight: 10,
-  }, 
+  },
   price: {
     fontWeight: "700!important",
     fontSize: "1.1rem",
@@ -43,25 +44,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CardHome() {
+function CardHome({ order }) {
   const classes = useStyles();
+
   return (
     <Card className={classes.root}>
-      <ImageAvatar width={14} height={14} image={imgAcai}/>    
+      <ImageAvatar width={14} height={14} image={imgAcai} />
       <CardContent>
         <Typography variant="h6" component="p">
-          Pedido #1
+          Pedido {order.number_order}
         </Typography>
         <Typography
           variant="subtitle1"
           component="p"
           className={classes.person}
         >
-          Morango, Pequeno (300ml)
+          {order.name}, {order.sizebucket}
         </Typography>
         <Typography variant="h4" component="p" className={classes.price}>
-          R$ <span className={classes.priceNumber}>10</span>,00
+          R$ <span className={classes.priceNumber}>{order.price_total}</span>,00
         </Typography>
+        <Detail order={order} />
       </CardContent>
       <CardActions disableSpacing className={classes.iconTemp}>
         <CardActions disableSpacing>

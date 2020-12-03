@@ -1,6 +1,7 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import types from "./types";
 import { alertShow } from "../alert/actions";
+import { OrderRequest } from "./actions";
 
 import api from "../../../services/api";
 import history from "../../../services/history";
@@ -27,5 +28,17 @@ function* orderRegister({ data }) {
     );
   }
 }
+function* orderGet() {
+  try {
+    const response = yield call(api.get, "/orders");
+    const res = response.data;
+    yield put(OrderRequest(res));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export default all([takeLatest(types.ORDER_REGISTER, orderRegister)]);
+export default all([
+  takeLatest(types.ORDER_REGISTER, orderRegister),
+  takeLatest(types.ORDER_GET, orderGet),
+]);
