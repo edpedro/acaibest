@@ -11,37 +11,6 @@ import logo from "../../assets/logo.png";
 
 import CardRegister from "./CardRegister";
 
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: "wrap",
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
-  buttons: {
-    background: "#5E35B1",
-    color: "#fff",
-    "&:hover": {
-      background: "#512DA8",
-    },
-  },
-  containerImg: {
-    width: "100%",
-    height: "auto",
-  },
-  logo: {
-    width: "120px",
-  },
-  cardRegist: {
-    marginTop: -90,
-  },
-}));
 function RegisterBucket() {
   const classes = useStyles();
 
@@ -116,3 +85,35 @@ function RegisterBucket() {
 }
 
 export default RegisterBucket;
+
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    flexWrap: "wrap",
+  },
+  toolbarTitle: {
+    flexGrow: 1,
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+  buttons: {
+    background: "#5E35B1",
+    color: "#fff",
+    "&:hover": {
+      background: "#512DA8",
+    },
+  },
+  containerImg: {
+    width: "100%",
+    height: "auto",
+  },
+  logo: {
+    width: "120px",
+  },
+  cardRegist: {
+    marginTop: -90,
+  },
+}));

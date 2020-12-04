@@ -8,16 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Cards from "../Card";
 import Checkboxes from "../Checkbox";
 
-const AcaiRadio = withStyles({
-  root: {
-    color: "#5E35B1",
-    "&$checked": {
-      color: "#5E35B1",
-    },
-  },
-  checked: {},
-})((props) => <Radio color="default" {...props} />);
-
 export default function RadioButtonsGroup({ buckets, onChange, data }) {
   const [flavor, setFlavor] = useState();
 
@@ -86,3 +76,13 @@ export default function RadioButtonsGroup({ buckets, onChange, data }) {
     </>
   );
 }
+
+const AcaiRadio = withStyles({
+  root: {
+    color: "#5E35B1",
+    "&$checked": {
+      color: "#5E35B1",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);

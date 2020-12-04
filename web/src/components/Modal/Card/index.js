@@ -4,20 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-const useStyles = makeStyles({
-  cardConten: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
 export default function Cards(props) {
   const classes = useStyles();
 
@@ -37,3 +23,17 @@ export default function Cards(props) {
     </>
   );
 }
+
+const useStyles = makeStyles({
+  cardConten: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});

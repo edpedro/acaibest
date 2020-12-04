@@ -24,6 +24,7 @@ function* orderRegister({ data }) {
       alertShow({
         type: "danger",
         title: "Erro ao processa o pedido",
+        message: "Tente novamente"
       })
     );
   }

@@ -14,6 +14,11 @@ function alert(state = INITTIAL_STATE, action) {
         draft.showMessage = true;
       });
     }
+    case types.ALERT_SHOW_FALSE: {
+      return produce(state, (draft) => {        
+        draft.showMessage = false;
+      });
+    }
     default: {
       return state;
     }

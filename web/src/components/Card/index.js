@@ -10,40 +10,6 @@ import imgAcai from "../../assets/balde2.jpg";
 import ImageAvatar from "../Avatar";
 import Detail from "./Detail";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 462,
-    height: 238,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 30,
-    marginTop: 30,
-  },
-  media: {
-    height: 150,
-    borderRadius: "50%",
-    width: 200,
-    marginLeft: 20,
-  },
-  iconTemp: {
-    display: "flex",
-    alignSelf: "flex-start",
-    marginRight: 10,
-  },
-  price: {
-    fontWeight: "700!important",
-    fontSize: "1.1rem",
-    marginTop: 20,
-  },
-  priceNumber: {
-    fontSize: "1.6rem",
-  },
-  person: {
-    marginTop: 20,
-  },
-}));
-
 function CardHome({ order }) {
   const classes = useStyles();
 
@@ -79,3 +45,37 @@ function CardHome({ order }) {
 }
 
 export default CardHome;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 462,
+    height: 238,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 30,
+    marginTop: 30,
+  },
+  media: {
+    height: 150,
+    borderRadius: "50%",
+    width: 200,
+    marginLeft: 20,
+  },
+  iconTemp: {
+    display: "flex",
+    alignSelf: "flex-start",
+    marginRight: 10,
+  },
+  price: {
+    fontWeight: "700!important",
+    fontSize: "1.1rem",
+    marginTop: 20,
+  },
+  priceNumber: {
+    fontSize: "1.6rem",
+  },
+  person: {
+    marginTop: 20,
+  },
+}));

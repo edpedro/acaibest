@@ -16,49 +16,6 @@ import RadioIcon from "./Radio";
 import { Getbucket } from "../../store/modules/bucket/actions";
 import { OrderRegister } from "../../store/modules/order/actions";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    overflow: "hidden",
-  },
-  formControl: {
-    width: 480,
-  },
-  formControlLabel: {
-    marginTop: theme.spacing(1),
-  },
-  title: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  img: {
-    marginLeft: "20%",
-  },
-  modalButton: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  button: {
-    padding: theme.spacing(1, 25),
-    borderRadius: 10,
-    background: "#5E35B1",
-    color: "#fff",
-    "&:hover": {
-      background: "#512DA8",
-    },
-  },
-  price: {
-    fontWeight: "700!important",
-    fontSize: "1.1rem",
-  },
-  priceNumber: {
-    fontSize: "1.6rem",
-  },
-  description: {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexDirection: "column",
-  },
-}));
 
 function Modal() {
   const classes = useStyles();
@@ -150,3 +107,48 @@ function Modal() {
 }
 
 export default Modal;
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: "hidden",
+  },
+  formControl: {
+    width: 480,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
+  title: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  img: {
+    marginLeft: "20%",
+  },
+  modalButton: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  button: {
+    padding: theme.spacing(1, 25),
+    borderRadius: 10,
+    background: "#5E35B1",
+    color: "#fff",
+    "&:hover": {
+      background: "#512DA8",
+    },
+  },
+  price: {
+    fontWeight: "700!important",
+    fontSize: "1.1rem",
+  },
+  priceNumber: {
+    fontSize: "1.6rem",
+  },
+  description: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+  },
+}));

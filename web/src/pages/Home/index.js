@@ -6,32 +6,10 @@ import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 
 import Card from "../../components/Card";
-import Header from '../../components/Header'
+import Header from "../../components/Header";
 
 import { OrderGet } from "../../store/modules/order/actions";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    overflowX: "hidden",
-  },
-  card: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
-  line: {
-    maxWidth: "100%",
-    border: "1px solid #E0E0E0",
-    marginTop: "10px",
-    marginBottom: "20px",
-  },
-  buttonOrder: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-}));
 function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -69,3 +47,26 @@ function Home() {
 }
 
 export default Home;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    overflowX: "hidden",
+  },
+  card: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+  line: {
+    maxWidth: "100%",
+    border: "1px solid #E0E0E0",
+    marginTop: "10px",
+    marginBottom: "20px",
+  },
+  buttonOrder: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));

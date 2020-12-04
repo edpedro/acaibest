@@ -7,16 +7,6 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Cards from "../Card";
 
-const AcaiCheckbox = withStyles({
-  root: {
-    color: "#5E35B1",
-    "&$checked": {
-      color: "#5E35B1",
-    },
-  },
-  checked: {},
-})((props) => <Checkbox color="default" {...props} />);
-
 function Checkboxes({ onChange, data, flavor, buckets, priceFlavor }) {
   const [price, setPrice] = useState([]);
 
@@ -40,7 +30,7 @@ function Checkboxes({ onChange, data, flavor, buckets, priceFlavor }) {
     onChange({
       ...data,
       personalize: newPerson,
-      price_person: pricePerson,      
+      price_person: pricePerson,
     });
   };
 
@@ -76,3 +66,13 @@ function Checkboxes({ onChange, data, flavor, buckets, priceFlavor }) {
   );
 }
 export default Checkboxes;
+
+const AcaiCheckbox = withStyles({
+  root: {
+    color: "#5E35B1",
+    "&$checked": {
+      color: "#5E35B1",
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);

@@ -4,16 +4,6 @@ import Search from "../Search";
 import logo from "../../assets/logo.png";
 import Modal from "../../components/Modal";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  logo: {
-    width: "200px",
-  },
-}));
 
 function Header() {
   const classes = useStyles();
@@ -28,3 +18,15 @@ function Header() {
 }
 
 export default Header;
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  logo: {
+    width: "200px",
+  },
+}));

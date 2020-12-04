@@ -6,20 +6,6 @@ import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  butto: {
-    width: 120,
-    height: 30,
-    marginTop: 10,
-    background: "#5E35B1",
-    color: "#fff",
-    "&:hover": {
-      background: "#512DA8",
-    },
-    textTransform: "lowercase",
-  },
-}));
-
 export default function Detail({ order }) {
   const classes = useStyles();
   return (
@@ -49,3 +35,17 @@ export default function Detail({ order }) {
     </PopupState>
   );
 }
+
+const useStyles = makeStyles((theme) => ({
+  butto: {
+    width: 120,
+    height: 30,
+    marginTop: 10,
+    background: "#5E35B1",
+    color: "#fff",
+    "&:hover": {
+      background: "#512DA8",
+    },
+    textTransform: "lowercase",
+  },
+}));

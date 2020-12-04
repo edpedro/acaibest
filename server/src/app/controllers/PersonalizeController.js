@@ -1,6 +1,8 @@
 const Personalize = require('../models/Personalize');
 const Flavor = require('../models/Flavor');
 
+const capitalized = require('../../utils/capitalized');
+
 module.exports = {
   async index(req, res) {
     const personalize = await Personalize.findAll({});
@@ -11,6 +13,8 @@ module.exports = {
     const { flavor_id } = req.params;
     const { name, price } = req.body;
 
+    const newName = capitalized(name);
+
     try {
       const flavor = await Flavor.findByPk(flavor_id);
 
@@ -18,7 +22,7 @@ module.exports = {
         return res.status(400).json({ error: 'flavor id does not fount' });
       }
 
-      if (!name) {
+      if (!newName) {
         return res.status(400).json({ error: 'please fill in name' });
       }
       if (!price) {
@@ -26,7 +30,7 @@ module.exports = {
       }
 
       const [personalize] = await Personalize.findOrCreate({
-        where: { name, price },
+        where: { name: newName, price },
       });
 
       await flavor.addPersonalize(personalize);
@@ -42,6 +46,8 @@ module.exports = {
     const { personalize_id } = req.params;
     const { name } = req.body;
 
+    const newName = capitalized(name);
+
     try {
       const response = await Personalize.findByPk(personalize_id);
 
@@ -49,14 +55,14 @@ module.exports = {
         return res.status(400).json({ error: 'name not found' });
       }
 
-      if (!name) {
+      if (!newName) {
         return res
           .status(400)
           .json({ error: 'please fill in the name to update' });
       }
 
       const pesonalize = await Personalize.update(
-        { name },
+        { name: newName },
         { where: { id: personalize_id } },
       );
 
@@ -71,25 +77,27 @@ module.exports = {
     const { flavor_id } = req.params;
     const { name } = req.body;
 
+    const newName = capitalized(name);
+
     try {
       const flavor = await Flavor.findByPk(flavor_id);
 
       if (!flavor) {
         return res.status(400).json({ error: 'id not found' });
       }
-      if (!name) {
+      if (!newName) {
         return res
           .status(400)
           .json({ error: 'please fill in the name to delete' });
       }
 
       const personalize = await Personalize.findOne({
-        where: { name },
+        where: { name: newName },
       });
 
       await Personalize.destroy({
         where: {
-          name,
+          name: newName,
         },
       });
       await flavor.removePersonalize(personalize);

@@ -2,13 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
-const useStyles = makeStyles((theme) => ({
-  large: (props) => ({
-    width: theme.spacing(props.width),
-    height: theme.spacing(props.height),
-  }),
-}));
-
 function ImageAvatar(props) {
   const classes = useStyles(props);
 
@@ -20,3 +13,10 @@ function ImageAvatar(props) {
 }
 
 export default ImageAvatar;
+
+const useStyles = makeStyles((theme) => ({
+  large: (props) => ({
+    width: theme.spacing(props.width),
+    height: theme.spacing(props.height),
+  }),
+}));

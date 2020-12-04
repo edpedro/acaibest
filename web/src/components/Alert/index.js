@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import "animate.css";
 
+import { alertShowFalse } from "../../store/modules/alert/actions";
+
 function Message() {
+  const dispatch = useDispatch()
   const isShow = useSelector((state) => state.alert.showMessage);
   const { title, type, message } = useSelector((state) => state.alert.data);
 
@@ -29,6 +32,7 @@ function Message() {
   useEffect(() => {
     if (isShow) {
       notification();
+      dispatch(alertShowFalse())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShow]);
