@@ -18,7 +18,7 @@ function Home() {
   useEffect(() => {
     dispatch(OrderGet());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ordersData]);
   return (
     <>
       <Header />

@@ -8,7 +8,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Route path="/" exact component={Home} />;
-      <RegisterBucket path="/registerbucket" component={RegisterBucket} />
+      <Route path="/registerbucket" component={RegisterBucket} />
     </BrowserRouter>
   );
 }
