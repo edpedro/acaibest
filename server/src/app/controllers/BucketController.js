@@ -11,7 +11,7 @@ module.exports = {
         },
         {
           association: 'sizebuckets',
-          attributes: ['name', 'price'],
+          attributes: ['id', 'name', 'price'],
           through: {},
         },
       ],

@@ -1,22 +1,27 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import types from "./types";
 import { alertShow } from "../alert/actions";
-import { PersonalizeRequest} from "./actions";
+import { PersonalizeRequest } from "./actions";
 
 import api from "../../../services/api";
+import history from '../../../services/history'
 
-function* personalizeRegister({ data }) {
-  console.log(data)
+function* personalizeRegister({ data, id }) {
   try {
-    const response = yield call(api.post, `persons/${data.id}`, data);
+    const newId = id ? id : data.id;
+    const method = id ? api.put : api.post;
+    const response = yield call(method, `persons/${newId}`, data);
+
+    const msg = id ? "atualizado" : "cadastrado";
 
     yield put(
       alertShow({
         type: "success",
-        title: "Personalização cadastrado com sucesso!",
-        message: response.data.name,
+        title: `Personalização ${msg} com sucesso!`,
+        message: id ? msg : response.data.name,
       })
     );
+    history.push("/listar")
   } catch (error) {
     yield put(
       alertShow({

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -9,7 +8,7 @@ import Container from "@material-ui/core/Container";
 import { FlavorRegister } from "../../../store/modules/flavor/actions";
 import { alertShow } from "../../../store/modules/alert/actions";
 
-function Flavor() {
+function FlavorRegis() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [flavor, setFlavor] = useState({
@@ -25,7 +24,10 @@ function Flavor() {
 
     if (flavor.name && flavor.price) {
       dispatch(FlavorRegister(flavor));
-      
+      setFlavor({
+        name: "",
+        price: "",
+      });
     } else {
       dispatch(
         alertShow({
@@ -35,15 +37,11 @@ function Flavor() {
         })
       );
     }
-
   }
 
   return (
     <Container maxWidth="sm">
       <div className={classes.root}>
-        <Typography component="h1" variant="h5">
-          Cadastro de Sabor
-        </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmint}>
           <TextField
             variant="outlined"
@@ -87,7 +85,7 @@ function Flavor() {
   );
 }
 
-export default Flavor;
+export default FlavorRegis;
 
 const useStyles = makeStyles((theme) => ({
   root: {

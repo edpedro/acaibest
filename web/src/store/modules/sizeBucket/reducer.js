@@ -4,6 +4,7 @@ import types from "./types";
 const INITTIAL_STATE = {
   sizeBuckets: [],
   getSizeBuckets: [],
+  updateSizeBucket: [],
 };
 
 function sizeBucket(state = INITTIAL_STATE, action) {
@@ -16,6 +17,11 @@ function sizeBucket(state = INITTIAL_STATE, action) {
     case types.SIZEBUCKET_REQUEST: {
       return produce(state, (draft) => {
         draft.getSizeBuckets = action.data;
+      });
+    }
+    case types.SIZEBUCKET_UPDATE: {
+      return produce(state, (draft) => {
+        draft.updateSizeBucket = action.data;
       });
     }
     default: {

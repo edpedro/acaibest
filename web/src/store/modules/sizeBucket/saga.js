@@ -4,19 +4,25 @@ import { alertShow } from "../alert/actions";
 import { SizeBcuketRequest } from "./actions";
 
 import api from "../../../services/api";
+import history from "../../../services/history"
 
-function* sizeBcuketRegister({ data }) {
-  console.log(data)
+function* sizeBcuketRegister({ data, id }) {
+
   try {
-    const response = yield call(api.post, `sizebucket/${data.id}`, data);
+    const newId = id ? id : data.id;
+    const method = id ? api.put : api.post;
 
+    const response = yield call(method, `sizebucket/${newId}`, data);
+
+    const msg = id ? "atualizado" : "cadastrado";
     yield put(
       alertShow({
         type: "success",
-        title: "Tamanho cadastrado com sucesso!",
-        message: response.data.name,
+        title: `Tamanho ${msg} com sucesso!`,
+        message: id ? msg : response.data.name,
       })
     );
+    history.push("/listar")
   } catch (error) {
     yield put(
       alertShow({

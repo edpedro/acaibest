@@ -6,7 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 
 import Card from "../../components/Card";
-import Header from "../../components/Header";
+import Header from "./Header";
 
 import { OrderGet } from "../../store/modules/order/actions";
 

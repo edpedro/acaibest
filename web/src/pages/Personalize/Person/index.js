@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -14,11 +13,14 @@ import { FlavorGet } from "../../../store/modules/flavor/actions";
 import { PersonalizeRegister } from "../../../store/modules/personalize/actions";
 import { alertShow } from "../../../store/modules/alert/actions";
 
-function Personalize() {
-  const dispatch = useDispatch();
-  const { getFlavor } = useSelector((state) => state.flavor);
+function Person() {
   const classes = useStyles();
-  const [flavor, setFlavor] = useState(""); 
+  const dispatch = useDispatch();
+
+  const { getFlavor } = useSelector((state) => state.flavor);
+  const { updatePesonalizes } = useSelector((state) => state.personalize);
+
+  const [flavor, setFlavor] = useState("");
   const [personalize, setPersonalize] = useState({
     id: "",
     name: "",
@@ -27,6 +29,13 @@ function Personalize() {
 
   useEffect(() => {
     dispatch(FlavorGet());
+
+    if (updatePesonalizes) {
+      setPersonalize({
+        name: updatePesonalizes.name,
+        price: updatePesonalizes.price,
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -38,7 +47,7 @@ function Personalize() {
     setPersonalize({ ...personalize, id: flavorId[0].id });
   };
 
-  const handleChange = (event) => {   
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setPersonalize((personalize) => ({ ...personalize, [name]: value }));
   };
@@ -46,9 +55,9 @@ function Personalize() {
   function handleSubmint(event) {
     event.preventDefault();
 
-    if (personalize.id && personalize.name && personalize.price) {
-      dispatch(PersonalizeRegister(personalize));
-      
+    if (personalize.name && personalize.price) {
+      dispatch(PersonalizeRegister(personalize, updatePesonalizes.id));
+      setPersonalize({ name: "", price: "" });
     } else {
       dispatch(
         alertShow({
@@ -58,38 +67,39 @@ function Personalize() {
         })
       );
     }
-
   }
- 
+
   return (
     <Container maxWidth="sm">
       <div className={classes.root}>
-        <Typography component="h1" variant="h5">
-          Personalizar
-        </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmint}>
-        <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              Sabor
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={flavor}
-              onChange={handleChangeSelect}
-              label="Sabor"
-              autoFocus
-            >
-              <MenuItem value="">
-                <em>Sabor</em>
-              </MenuItem>
-              {getFlavor.map((falvor, key) => (
-                <MenuItem key={key} value={falvor.name}>
-                  {falvor.name}
+          {updatePesonalizes.length >= 0 ? (
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Sabor
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={flavor}
+                onChange={handleChangeSelect}
+                label="Sabor"
+                autoFocus
+              >
+                <MenuItem value="">
+                  <em>Sabor</em>
                 </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+                {getFlavor.map((falvor, key) => (
+                  <MenuItem key={key} value={falvor.name}>
+                    {falvor.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : (
+            ""
+          )}
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,9 +108,9 @@ function Personalize() {
             id="name"
             label="Ex.. Granola"
             name="name"
-            autoComplete="fullWidth" 
+            autoComplete="fullWidth"
             value={personalize.name}
-            onChange={handleChange}         
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -130,7 +140,7 @@ function Personalize() {
   );
 }
 
-export default Personalize;
+export default Person;
 
 const useStyles = makeStyles((theme) => ({
   root: {

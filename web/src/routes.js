@@ -1,15 +1,22 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import RegisterBucket from "./pages/RegisterBucket";
+
+import ListBucket from "./pages/ListBucket";
+import Flavor from './pages/Flavor'
+import Personalize from "./pages/Personalize"
+import SizeBucket from './pages/SizeBucket'
 
 function Routes() {
   return (
-    <BrowserRouter>
-      <Route path="/" exact component={Home} />;
-      <Route path="/registerbucket" component={RegisterBucket} />
-    </BrowserRouter>
+    <Switch>
+      <Route path="/" exact component={Home} />;   
+      <Route path="/listar" component={ListBucket} />
+      <Route path="/cadastar/sabor" component={Flavor} />
+      <Route path="/cadastrar/pesonalizacao" component={Personalize} />
+      <Route path="/cadastrar/tamanho" component={SizeBucket} />
+    </Switch>
   );
 }
 

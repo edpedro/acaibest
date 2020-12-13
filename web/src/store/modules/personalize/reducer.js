@@ -4,6 +4,7 @@ import types from "./types";
 const INITTIAL_STATE = {
   personalizes: [],
   getPersonalizes: [],
+  updatePesonalizes: [],
 };
 
 function personalize(state = INITTIAL_STATE, action) {
@@ -16,6 +17,11 @@ function personalize(state = INITTIAL_STATE, action) {
     case types.PERSONALIZE_REQUEST: {
       return produce(state, (draft) => {
         draft.getPersonalizes = action.data;
+      });
+    }
+    case types.PERSONALIZE_UPDATE: {
+      return produce(state, (draft) => {
+        draft.updatePesonalizes = action.data;
       });
     }
     default: {

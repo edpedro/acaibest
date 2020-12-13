@@ -1,32 +1,90 @@
+import React from 'react'
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Search from "../Search";
-
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import logo from "../../assets/logo.png";
-import Modal from "../../components/Modal";
-
 
 function Header() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <img src={logo} alt="logo" className={classes.logo} />
-      <Search />
-      <Modal />
+      <AppBar
+        position="static"
+        color="default"
+        elevation={0}
+        className={classes.appBar}
+      >
+        <Toolbar className={classes.toolbar}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.toolbarTitle}
+          >
+            <img src={logo} alt="logo" className={classes.logo} />
+          </Typography>
+
+          <nav>
+            <Link to="/grafico" className={classes.link}>
+              Graficos
+            </Link>
+            <Link to="/" className={classes.link}>
+              Pedidos
+            </Link>
+            <Link to="/listar" className={classes.link}>
+              Listar
+            </Link>           
+            <Link to="/usuarios" className={classes.link}>
+              Usuarios
+            </Link>
+          </nav>
+          <Button
+            href="#"
+            color="primary"
+            variant="outlined"
+            className={classes.buttons}
+          >
+            Sair
+          </Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
 
 export default Header;
 
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
+  appBar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    flexWrap: "wrap",
+  },
+  toolbarTitle: {
+    flexGrow: 1,
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+    textDecoration: "none",
+    textTransform: "uppercase",
+    fontSize: 14,
+    color: "#000",
+    fontWeight: 500,
+    fontFamily: "Roboto"
+  },
+  buttons: {
+    background: "#5E35B1",
+    color: "#fff",
+    "&:hover": {
+      background: "#512DA8",
+    },
   },
   logo: {
-    width: "200px",
+    width: "120px",
   },
 }));
