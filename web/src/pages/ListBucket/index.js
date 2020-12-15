@@ -21,11 +21,13 @@ export default function ListBucket() {
 
   const dispatch = useDispatch();
   const { buckets } = useSelector((state) => state.bucket);
+  const { deleteSizeBucket } = useSelector((state) => state.sizeBucket);
+  const { deletePesonalizes } = useSelector((state) => state.personalize);
 
   useEffect(() => {
     dispatch(Getbucket());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [deleteSizeBucket, deletePesonalizes]);
 
   return (
     <>

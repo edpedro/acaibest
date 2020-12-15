@@ -15,3 +15,9 @@ export function PersonalizeRequest(data) {
 export function PersonalizeUpdate(data) {
   return { type: types.PERSONALIZE_UPDATE, data };
 }
+export function PersonalizeDelete(data, id) {
+  return { type: types.PERSONALIZE_DELETE, data, id };
+}
+export function PersonalizeDeleteSuccess(data) {
+  return { type: types.PERSONALIZE_DELETE_SUCCESS, data};
+}

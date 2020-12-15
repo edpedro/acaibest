@@ -1,13 +1,12 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import types from "./types";
 import { alertShow } from "../alert/actions";
-import { SizeBcuketRequest } from "./actions";
+import { SizeBcuketRequest, SizeBcuketDeleteSuccess } from "./actions";
 
 import api from "../../../services/api";
-import history from "../../../services/history"
+import history from "../../../services/history";
 
 function* sizeBcuketRegister({ data, id }) {
-
   try {
     const newId = id ? id : data.id;
     const method = id ? api.put : api.post;
@@ -22,7 +21,7 @@ function* sizeBcuketRegister({ data, id }) {
         message: id ? msg : response.data.name,
       })
     );
-    history.push("/listar")
+    history.push("/listar");
   } catch (error) {
     yield put(
       alertShow({
@@ -40,7 +39,31 @@ export function* getSizeBcuket() {
   yield put(SizeBcuketRequest(res));
 }
 
+function* deleteSizeBcuket({ data, id }) {
+  try {
+    yield call(api.delete, `sizebucket/${id}`, { data });
+
+    yield put(
+      alertShow({
+        type: "success",
+        title: `Deletado com sucesso!`,
+        message: data.name,
+      })
+    );
+    yield put(SizeBcuketDeleteSuccess(true));
+  } catch (error) {
+    yield put(
+      alertShow({
+        type: "danger",
+        title: "Erro ao deleta a tamanho",
+        message: "Tente novamente",
+      })
+    );
+  }
+}
+
 export default all([
   takeLatest(types.SIZEBUCKET_REGISTER, sizeBcuketRegister),
   takeLatest(types.SIZEBUCKET_GET, getSizeBcuket),
+  takeLatest(types.SIZEBUCKET_DELETE, deleteSizeBcuket),
 ]);

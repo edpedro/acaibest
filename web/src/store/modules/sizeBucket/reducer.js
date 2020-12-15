@@ -5,6 +5,7 @@ const INITTIAL_STATE = {
   sizeBuckets: [],
   getSizeBuckets: [],
   updateSizeBucket: [],
+  deleteSizeBucket: false,
 };
 
 function sizeBucket(state = INITTIAL_STATE, action) {
@@ -22,6 +23,11 @@ function sizeBucket(state = INITTIAL_STATE, action) {
     case types.SIZEBUCKET_UPDATE: {
       return produce(state, (draft) => {
         draft.updateSizeBucket = action.data;
+      });
+    }
+    case types.SIZEBUCKET_DELETE_SUCCESS: {
+      return produce(state, (draft) => {
+        draft.deleteSizeBucket = action.data;
       });
     }
     default: {

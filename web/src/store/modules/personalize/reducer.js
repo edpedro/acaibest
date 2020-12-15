@@ -5,6 +5,7 @@ const INITTIAL_STATE = {
   personalizes: [],
   getPersonalizes: [],
   updatePesonalizes: [],
+  deletePesonalizes: false
 };
 
 function personalize(state = INITTIAL_STATE, action) {
@@ -22,6 +23,11 @@ function personalize(state = INITTIAL_STATE, action) {
     case types.PERSONALIZE_UPDATE: {
       return produce(state, (draft) => {
         draft.updatePesonalizes = action.data;
+      });
+    }
+    case types.PERSONALIZE_DELETE_SUCCESS: {
+      return produce(state, (draft) => {
+        draft.deletePesonalizes = action.data;
       });
     }
     default: {

@@ -21,7 +21,7 @@ function Modal() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { buckets } = useSelector((state) => state.bucket);
-  console.log(buckets)
+  
   const [data, setData] = useState({
     number_order: Math.floor(1000 + Math.random() * 9000),
     name: "",

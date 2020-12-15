@@ -15,3 +15,9 @@ export function SizeBcuketRequest(data) {
 export function SizeBcuketUpdate(data) {
   return { type: types.SIZEBUCKET_UPDATE, data };
 }
+export function SizeBcuketDelete(data, id) {
+  return { type: types.SIZEBUCKET_DELETE, data, id };
+}
+export function SizeBcuketDeleteSuccess(data) {
+  return { type: types.SIZEBUCKET_DELETE_SUCCESS, data};
+}

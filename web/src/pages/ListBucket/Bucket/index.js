@@ -13,15 +13,16 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
+
+import ModalDelete from "../../../components/ModalDelete";
 
 import { PersonalizeUpdate } from "../../../store/modules/personalize/actions";
 import { SizeBcuketUpdate } from "../../../store/modules/sizeBucket/actions";
 
 import history from "../../../services/history";
 
-function Bucket(props) {
+function Bucket(props) {  
   // const history = useHistory();
   const { bucket } = props;
   const dispatch = useDispatch();
@@ -33,8 +34,7 @@ function Bucket(props) {
     history.push("/cadastrar/pesonalizacao");
   }
 
-  function handleUpdateSizeBucket(data) {
-    console.log(data)
+  function handleUpdateSizeBucket(data) {   
     dispatch(SizeBcuketUpdate(data));
     history.push("/cadastrar/tamanho");
   }
@@ -87,10 +87,12 @@ function Bucket(props) {
                           <EditIcon
                             style={{ color: "#ef6c00", cursor: "pointer" }}
                           />
-                        </Button>{" "}
+                        </Button>
                         <Button>
-                          <DeleteIcon
-                            style={{ color: "#ff1744", cursor: "pointer" }}
+                          <ModalDelete
+                            bucket={bucket.id}
+                            data={personalize}
+                            title="Deseja deleta personalização?"
                           />
                         </Button>
                       </TableCell>
@@ -131,8 +133,10 @@ function Bucket(props) {
                           />
                         </Button>{" "}
                         <Button>
-                          <DeleteIcon
-                            style={{ color: "#ff1744", cursor: "pointer" }}
+                          <ModalDelete
+                            bucket={bucket.id}
+                            data={sizebucket}
+                            title="Deseja deleta tamanho?"
                           />
                         </Button>
                       </TableCell>

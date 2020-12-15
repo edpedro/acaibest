@@ -1,10 +1,10 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import types from "./types";
 import { alertShow } from "../alert/actions";
-import { PersonalizeRequest } from "./actions";
+import { PersonalizeRequest, PersonalizeDeleteSuccess } from "./actions";
 
 import api from "../../../services/api";
-import history from '../../../services/history'
+import history from "../../../services/history";
 
 function* personalizeRegister({ data, id }) {
   try {
@@ -21,12 +21,12 @@ function* personalizeRegister({ data, id }) {
         message: id ? msg : response.data.name,
       })
     );
-    history.push("/listar")
+    history.push("/listar");
   } catch (error) {
     yield put(
       alertShow({
         type: "danger",
-        title: "Erro ao cadastrar a personalização",
+        title: `Erro na execução`,
         message: "Tente novamente",
       })
     );
@@ -39,7 +39,31 @@ export function* getPersonalize() {
   yield put(PersonalizeRequest(res));
 }
 
+function* deletePersonalize({ data, id }) {
+  try {
+    yield call(api.delete, `persons/${id}`, { data });
+
+    yield put(PersonalizeDeleteSuccess(true));
+    yield put(
+      alertShow({
+        type: "success",
+        title: `Deletado com sucesso!`,
+        message: data.name,
+      })
+    );
+  } catch (error) {
+    yield put(
+      alertShow({
+        type: "danger",
+        title: "Erro ao deleta a personalização",
+        message: "Tente novamente",
+      })
+    );
+  }
+}
+
 export default all([
   takeLatest(types.PERSONALIZE_REGISTER, personalizeRegister),
   takeLatest(types.PERSONALIZE_GET, getPersonalize),
+  takeLatest(types.PERSONALIZE_DELETE, deletePersonalize),
 ]);
