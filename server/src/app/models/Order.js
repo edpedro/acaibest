@@ -9,6 +9,7 @@ class Order extends Model {
         personalize: DataTypes.ARRAY(DataTypes.STRING),
         sizebucket: DataTypes.STRING,
         price_total: DataTypes.FLOAT,
+        status: DataTypes.BOOLEAN,
       },
       {
         sequelize,

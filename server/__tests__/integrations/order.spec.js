@@ -139,4 +139,41 @@ describe('Personalize', () => {
       }),
     );
   });
+  it('should update status', async () => {
+    const order = await factory.attrs('Order');
+
+    const responseOrder = await request(app).post('/orders').send(order);
+
+    const response = await request(app)
+      .put(`/orders/${responseOrder.body.number_order}`)
+      .send({
+        status: false,
+      });
+
+    expect(response.status).toBe(200);
+  });
+  it('should not update the request by order_number not found', async () => {
+    const id = 999;
+
+    const response = await request(app).put(`/orders/${id}`).send();
+
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchObject(
+      expect.objectContaining({
+        error: 'order_number not found',
+      }),
+    );
+  });
+  it('should return 404', async () => {
+    const id = null;
+
+    const response = await request(app).put(`/orders/${id}`).send();
+
+    expect(response.status).toBe(404);
+    expect(response.body).toMatchObject(
+      expect.objectContaining({
+        error: 'update error please try again',
+      }),
+    );
+  });
 });

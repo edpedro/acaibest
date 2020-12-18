@@ -12,6 +12,7 @@ routes.get('/orders', OrderController.index);
 routes.get('/orders/:number_order', OrderController.showId);
 routes.delete('/orders/:number_order', OrderController.delete);
 routes.post('/orders', OrderController.store);
+routes.put('/orders/:number_order', OrderController.update);
 
 routes.get('/flavors', FlavorController.index);
 routes.post('/flavors', FlavorController.store);
