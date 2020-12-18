@@ -6,7 +6,6 @@ export function OrderRegister(data) {
 export function OrderRegisterSuccess(data) {
   return { type: types.ORDER_REGISTER_SUCCESS, data };
 }
-
 export function OrderGet(data) {  
   return { type: types.ORDER_GET, data };
 }

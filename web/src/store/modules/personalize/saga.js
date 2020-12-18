@@ -43,7 +43,6 @@ function* deletePersonalize({ data, id }) {
   try {
     yield call(api.delete, `persons/${id}`, { data });
 
-    yield put(PersonalizeDeleteSuccess(true));
     yield put(
       alertShow({
         type: "success",
@@ -51,6 +50,7 @@ function* deletePersonalize({ data, id }) {
         message: data.name,
       })
     );
+    yield put(PersonalizeDeleteSuccess(data.name));
   } catch (error) {
     yield put(
       alertShow({

@@ -5,7 +5,7 @@ const INITTIAL_STATE = {
   personalizes: [],
   getPersonalizes: [],
   updatePesonalizes: [],
-  deletePesonalizes: false
+  deletePesonalizes: [],
 };
 
 function personalize(state = INITTIAL_STATE, action) {

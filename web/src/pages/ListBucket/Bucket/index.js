@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -22,7 +22,7 @@ import { SizeBcuketUpdate } from "../../../store/modules/sizeBucket/actions";
 
 import history from "../../../services/history";
 
-function Bucket(props) {  
+function Bucket(props) {
   // const history = useHistory();
   const { bucket } = props;
   const dispatch = useDispatch();
@@ -34,10 +34,14 @@ function Bucket(props) {
     history.push("/cadastrar/pesonalizacao");
   }
 
-  function handleUpdateSizeBucket(data) {   
+  function handleUpdateSizeBucket(data) {
     dispatch(SizeBcuketUpdate(data));
     history.push("/cadastrar/tamanho");
   }
+
+  useEffect(() =>{
+    setOpen(false)
+  },[bucket])
 
   return (
     <React.Fragment>
@@ -131,7 +135,7 @@ function Bucket(props) {
                           <EditIcon
                             style={{ color: "#ef6c00", cursor: "pointer" }}
                           />
-                        </Button>{" "}
+                        </Button>
                         <Button>
                           <ModalDelete
                             bucket={bucket.id}

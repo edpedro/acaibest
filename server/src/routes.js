@@ -15,6 +15,8 @@ routes.post('/orders', OrderController.store);
 
 routes.get('/flavors', FlavorController.index);
 routes.post('/flavors', FlavorController.store);
+routes.delete('/flavors/:flavor_id', FlavorController.delete);
+routes.put('/flavors/:flavor_id', FlavorController.update);
 
 routes.get('/persons', PersonalizeController.index);
 routes.post('/persons/:flavor_id', PersonalizeController.store);

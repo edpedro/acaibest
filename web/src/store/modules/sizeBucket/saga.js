@@ -50,7 +50,7 @@ function* deleteSizeBcuket({ data, id }) {
         message: data.name,
       })
     );
-    yield put(SizeBcuketDeleteSuccess(true));
+    yield put(SizeBcuketDeleteSuccess(data.name));
   } catch (error) {
     yield put(
       alertShow({

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -29,15 +29,15 @@ function Header() {
           </Typography>
 
           <nav>
-            <Link to="/grafico" className={classes.link}>
-              Graficos
+            <Link to="/relatorio" className={classes.link}>
+              Relatório
             </Link>
             <Link to="/" className={classes.link}>
               Pedidos
             </Link>
             <Link to="/listar" className={classes.link}>
               Listar
-            </Link>           
+            </Link>
             <Link to="/usuarios" className={classes.link}>
               Usuarios
             </Link>
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     color: "#000",
     fontWeight: 500,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
   },
   buttons: {
     background: "#5E35B1",

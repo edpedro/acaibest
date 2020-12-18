@@ -5,7 +5,7 @@ const INITTIAL_STATE = {
   sizeBuckets: [],
   getSizeBuckets: [],
   updateSizeBucket: [],
-  deleteSizeBucket: false,
+  deleteSizeBucket: [],
 };
 
 function sizeBucket(state = INITTIAL_STATE, action) {

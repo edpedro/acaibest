@@ -13,20 +13,14 @@ import { PersonalizeDelete } from "../../store/modules/personalize/actions";
 import { SizeBcuketDelete } from "../../store/modules/sizeBucket/actions";
 
 export default function ModalDelete(props) {
-  
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState({
-    name: "",
-  });
 
   const handleClickOpen = () => {
     setOpen(true);
-    setData({
-      name: props.data.name,
-    });
+   
   };
 
   const handleClose = () => {
@@ -35,9 +29,9 @@ export default function ModalDelete(props) {
 
   const handleDelete = () => {
     if (props.data.flavors_personalizes) {
-      dispatch(PersonalizeDelete(data, props.bucket));
+      dispatch(PersonalizeDelete(props.data, props.bucket));
     } else {
-      dispatch(SizeBcuketDelete(data, props.bucket));
+      dispatch(SizeBcuketDelete(props.data, props.bucket));
     }
     setOpen(false);
   };
