@@ -19,11 +19,12 @@ import ModalDelete from "../../../components/ModalDelete";
 
 import { PersonalizeUpdate } from "../../../store/modules/personalize/actions";
 import { SizeBcuketUpdate } from "../../../store/modules/sizeBucket/actions";
+import { FlavorUpdate } from "../../../store/modules/flavor/actions";
 
 import history from "../../../services/history";
 
 function Bucket(props) {
-  // const history = useHistory();
+ 
   const { bucket } = props;
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
@@ -38,10 +39,15 @@ function Bucket(props) {
     dispatch(SizeBcuketUpdate(data));
     history.push("/cadastrar/tamanho");
   }
+  
+  function handleUpdateFlavor(data){
+    dispatch(FlavorUpdate(data))
+    history.push("/cadastar/sabor");
+  }
 
-  useEffect(() =>{
-    setOpen(false)
-  },[bucket])
+  useEffect(() => {
+    setOpen(false);
+  }, [bucket]);
 
   return (
     <React.Fragment>
@@ -59,18 +65,30 @@ function Bucket(props) {
           {bucket.name}
         </TableCell>
         <TableCell className={classes.header}>R$ {bucket.price}</TableCell>
+        <TableCell>
+          <Button onClick={() => handleUpdateFlavor(bucket)}>
+            <EditIcon style={{ color: "#ef6c00", cursor: "pointer" }} />
+          </Button>
+          <Button>
+            <ModalDelete
+              bucket={bucket.id}
+              data={bucket}
+              title="Deseja deleta sabor?"
+              type="flavor"
+            />
+          </Button>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
+            <Box margin={1} className={classes.cardContainer}>
+              <Typography variant="h6" gutterBottom component="div" className={classes.textTop}>
                 Personalização
               </Typography>
               <Table
                 size="small"
-                aria-label="purchases"
-                className={classes.cardContainer}
+                aria-label="purchases"                
               >
                 <TableHead>
                   <TableRow>
@@ -97,6 +115,7 @@ function Bucket(props) {
                             bucket={bucket.id}
                             data={personalize}
                             title="Deseja deleta personalização?"
+                            type="personalize"
                           />
                         </Button>
                       </TableCell>
@@ -105,17 +124,17 @@ function Bucket(props) {
                 </TableBody>
               </Table>
             </Box>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
+            <Box margin={1}  className={classes.cardContainer}>
+              <Typography variant="h6" gutterBottom component="div" className={classes.textTop}>
                 Tamanho do Balde
               </Typography>
               <Table
                 size="small"
                 aria-label="purchases"
-                className={classes.cardContainer}
+                className={classes.balde1}
               >
-                <TableHead>
-                  <TableRow>
+                <TableHead >
+                  <TableRow className={classes.balde1}>
                     <TableCell>Nome</TableCell>
                     <TableCell>Preço</TableCell>
                     <TableCell>Ações</TableCell>
@@ -141,6 +160,7 @@ function Bucket(props) {
                             bucket={bucket.id}
                             data={sizebucket}
                             title="Deseja deleta tamanho?"
+                            type="sizebucket"
                           />
                         </Button>
                       </TableCell>
@@ -163,10 +183,14 @@ const useRowStyles = makeStyles({
     "& > *": {
       borderBottom: "unset",
     },
+    background: "#f5f5f5"
   },
   header: {
     fontSize: 16,
     fontWeight: 500,
+  }, 
+  textTop:{
+    marginLeft: 14
   },
-  cardContainer: {},
+
 });

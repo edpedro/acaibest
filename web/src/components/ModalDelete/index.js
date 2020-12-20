@@ -11,8 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { PersonalizeDelete } from "../../store/modules/personalize/actions";
 import { SizeBcuketDelete } from "../../store/modules/sizeBucket/actions";
+import { FlavorDelete } from "../../store/modules/flavor/actions";
 
-export default function ModalDelete(props) {
+export default function ModalDelete(props) { 
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -20,19 +21,26 @@ export default function ModalDelete(props) {
 
   const handleClickOpen = () => {
     setOpen(true);
-   
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleDelete = () => {
-    if (props.data.flavors_personalizes) {
-      dispatch(PersonalizeDelete(props.data, props.bucket));
-    } else {
-      dispatch(SizeBcuketDelete(props.data, props.bucket));
-    }
+  const handleDelete = (data) => {
+    switch (data) {     
+      case "personalize":        
+        dispatch(PersonalizeDelete(props.data, props.bucket));
+        break;
+      case "sizebucket":
+        dispatch(SizeBcuketDelete(props.data, props.bucket));
+        break;
+      case "flavor":
+        dispatch(FlavorDelete(props.data, props.bucket));
+        break;
+      default:
+        break;
+    }   
     setOpen(false);
   };
 
@@ -63,7 +71,7 @@ export default function ModalDelete(props) {
             Fechar
           </Button>
           <Button
-            onClick={handleDelete}
+            onClick={() => handleDelete(props.type)}
             color="primary"
             autoFocus
             className={classes.button}

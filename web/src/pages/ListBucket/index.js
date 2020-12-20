@@ -23,11 +23,12 @@ export default function ListBucket() {
   const { buckets } = useSelector((state) => state.bucket);
   const { deleteSizeBucket } = useSelector((state) => state.sizeBucket);
   const { deletePesonalizes } = useSelector((state) => state.personalize);
+  const { deleteFlavor } = useSelector((state) => state.flavor);
 
   useEffect(() => {
     dispatch(Getbucket());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteSizeBucket, deletePesonalizes]);
+  }, [deleteSizeBucket, deletePesonalizes, deleteFlavor]);
 
   return (
     <>
@@ -41,6 +42,7 @@ export default function ListBucket() {
                 <TableCell />
                 <TableCell className={classes.textHeader}>Sabor</TableCell>
                 <TableCell className={classes.textHeader}>Preço</TableCell>
+                <TableCell className={classes.textHeader}>Ações</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

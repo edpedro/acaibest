@@ -53,7 +53,7 @@ module.exports = {
   },
   async update(req, res) {
     const { flavor_id } = req.params;
-    const { name } = req.body;
+    const { name, price } = req.body;
 
     const newName = capitalized(name);
 
@@ -65,7 +65,7 @@ module.exports = {
       }
 
       const flavor = await Flavor.update(
-        { name: newName },
+        { name: newName, price },
         { where: { id: flavor_id } },
       );
 

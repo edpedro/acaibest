@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,12 +9,23 @@ import { FlavorRegister } from "../../../store/modules/flavor/actions";
 import { alertShow } from "../../../store/modules/alert/actions";
 
 function FlavorRegis() {
+  const { updateFlavor } = useSelector((state) => state.flavor);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [flavor, setFlavor] = useState({
     name: "",
     price: "",
   });
+
+  useEffect(() => {
+    if (updateFlavor) {
+      setFlavor({
+        name: updateFlavor.name,
+        price: updateFlavor.price,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateFlavor]);
   function handleChange(event) {
     const { name, value } = event.target;
     setFlavor((flavor) => ({ ...flavor, [name]: value }));
@@ -23,7 +34,7 @@ function FlavorRegis() {
     event.preventDefault();
 
     if (flavor.name && flavor.price) {
-      dispatch(FlavorRegister(flavor));
+      dispatch(FlavorRegister(flavor, updateFlavor.id));
       setFlavor({
         name: "",
         price: "",
@@ -51,8 +62,7 @@ function FlavorRegis() {
             id="name"
             label="Ex.. Morango"
             name="name"
-            autoFocus
-            defaultValue="Reset"
+            autoFocus            
             value={flavor.name}
             onChange={handleChange}
           />
@@ -64,9 +74,7 @@ function FlavorRegis() {
             name="price"
             label="Preço"
             type="number"
-            id="price"
-            defaultValue="Reset"
-            autoComplete="current-price"
+            id="price"           
             onChange={handleChange}
             value={flavor.price}
           />

@@ -44,7 +44,7 @@ module.exports = {
   },
   async update(req, res) {
     const { personalize_id } = req.params;
-    const { name } = req.body;
+    const { name, price } = req.body;
 
     const newName = capitalized(name);
 
@@ -62,7 +62,7 @@ module.exports = {
       }
 
       const pesonalize = await Personalize.update(
-        { name: newName },
+        { name: newName, price },
         { where: { id: personalize_id } },
       );
 
