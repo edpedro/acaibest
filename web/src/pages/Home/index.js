@@ -4,8 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Container from '@material-ui/core/Container';
 
-import Card from "../../components/Card";
+import Card1 from "../../components/Card1";
+
 import Header from "./Header";
 
 import { OrderGet } from "../../store/modules/order/actions";
@@ -13,17 +16,19 @@ import { OrderGet } from "../../store/modules/order/actions";
 function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { ordersData } = useSelector((state) => state.order);
+  const { ordersData, orders, orderStatus } = useSelector((state) => state.order);
+  
 
   useEffect(() => {
     dispatch(OrderGet());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ordersData]);
+  }, [orders, orderStatus]);
   return (
     <>
       <Header />
       <div className={classes.line}></div>
-      <div className={classes.card}>
+      <Container maxWidth="lg">
+      <div>
         <div className={classes.buttonOrder}>
           {ordersData.length < 0 && (
             <>
@@ -38,26 +43,22 @@ function Home() {
             </>
           )}
         </div>
-        {ordersData.map((order, key) => (
-          <Card order={order} key={key} />
-        ))}
+        <Grid container spacing={3}>
+          {ordersData.map((order, key) => (
+            <Grid item lg={4} md={6} sm={6} xs={12} key={key}>             
+              <Card1 order={order} />
+            </Grid>
+          ))}
+        </Grid>       
       </div>
+      </Container>
     </>
   );
 }
 
 export default Home;
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    overflowX: "hidden",
-  },
-  card: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-  },
+const useStyles = makeStyles((theme) => ({ 
   line: {
     maxWidth: "100%",
     border: "1px solid #E0E0E0",

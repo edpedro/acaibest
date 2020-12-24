@@ -24,6 +24,7 @@ export default function ListBucket() {
   const { deleteSizeBucket } = useSelector((state) => state.sizeBucket);
   const { deletePesonalizes } = useSelector((state) => state.personalize);
   const { deleteFlavor } = useSelector((state) => state.flavor);
+ 
 
   useEffect(() => {
     dispatch(Getbucket());

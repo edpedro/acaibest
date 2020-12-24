@@ -13,7 +13,7 @@ export default function Detail({ order }) {
       {(popupState) => (
         <div>
           <Button {...bindTrigger(popupState)} className={classes.butto}>
-            Ver detalhes
+            Detalhes
           </Button>
           <Popover
             {...bindPopover(popupState)}
@@ -25,7 +25,7 @@ export default function Detail({ order }) {
               vertical: "top",
               horizontal: "center",
             }}
-          >
+          >           
             <Box p={2}>
               <Typography>{order.personalize.join(", ")}</Typography>
             </Box>
@@ -38,13 +38,12 @@ export default function Detail({ order }) {
 
 const useStyles = makeStyles((theme) => ({
   butto: {
-    width: 120,
-    height: 30,
-    marginTop: 10,
-    background: "#5E35B1",
+    width: 50,
+    height: 30,   
+    background: "#000000",
     color: "#fff",
     "&:hover": {
-      background: "#512DA8",
+      background: "#151515",
     },
     textTransform: "lowercase",
   },

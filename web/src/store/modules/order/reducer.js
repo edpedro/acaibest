@@ -7,6 +7,7 @@ const INITTIAL_STATE = {
   orders: [],
   ordersData: [],
   orderReport: {},
+  orderStatus: []
 };
 
 function order(state = INITTIAL_STATE, action) {
@@ -14,6 +15,11 @@ function order(state = INITTIAL_STATE, action) {
     case types.ORDER_REGISTER_SUCCESS: {
       return produce(state, (draft) => {
         draft.orders = action.data;
+      });
+    }
+    case types.ORDER_STATUS_SUCCESS: {
+      return produce(state, (draft) => {
+        draft.orderStatus = action.data;
       });
     }
     case types.ORDER_REQUEST: {

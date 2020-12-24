@@ -10,7 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import ButtonOrder from "../Buttons";
 import ImageAvatar from "../Avatar";
-import imgAcai from "../../assets/balde1.jpg";
+import imgAcai from "../../assets/balde3.jpg";
 import RadioIcon from "./Radio";
 
 import { Getbucket } from "../../store/modules/bucket/actions";

@@ -12,3 +12,9 @@ export function OrderGet(data) {
 export function OrderRequest(data) {
   return { type: types.ORDER_REQUEST, data };
 }
+export function OrderStatus(data, id) {
+  return { type: types.ORDER_STATUS, data, id };
+}
+export function OrderStatusSuccess(data) {
+  return { type: types.ORDER_STATUS_SUCCESS, data};
+}
