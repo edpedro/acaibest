@@ -18,3 +18,6 @@ export function OrderStatus(data, id) {
 export function OrderStatusSuccess(data) {
   return { type: types.ORDER_STATUS_SUCCESS, data};
 }
+export function OrderReport(data) {
+  return { type: types.ORDER_REPORT, data};
+}

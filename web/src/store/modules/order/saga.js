@@ -53,7 +53,7 @@ function* orderStatus({ data, id }) {
         message: `Numero do Pedido ${id}`,
       })      
     );  
-    yield put(OrderStatusSuccess(id))
+    yield put(OrderStatusSuccess(data))
   } catch (error) {
     yield put(
       alertShow({

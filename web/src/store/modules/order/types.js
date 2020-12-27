@@ -4,6 +4,7 @@ const types = {
   ORDER_GET: "@order/ORDER_GET",
   ORDER_REQUEST: "@order/ORDER_REQUEST",
   ORDER_STATUS: "@order/ORDER_STATUS",
-  ORDER_STATUS_SUCCESS: "@order/ORDER_STATUS_SUCCESS"
+  ORDER_STATUS_SUCCESS: "@order/ORDER_STATUS_SUCCESS",
+  ORDER_REPORT: "@order/ORDER_REPORT"
 };
 export default types;
