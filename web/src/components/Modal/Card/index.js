@@ -11,11 +11,10 @@ export default function Cards(props) {
     <>
       <Card>
         <CardContent className={classes.cardConten}>
-          <Typography variant="subtitle2" component="h2">
-            {props.title}
-            <strong> 0 de 1</strong>
+          <Typography variant="subtitle2" component="h2" className={classes.text}>
+            {props.title}           
           </Typography>
-          <Typography variant="subtitle2" component="h2">
+          <Typography variant="subtitle2" component="h2" className={classes.text}>
             {props.required}
           </Typography>
         </CardContent>
@@ -36,4 +35,8 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  text:{
+    fontSize: 15,
+    fontWeight: 800
+  }
 });
