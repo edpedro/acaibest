@@ -1,4 +1,4 @@
-# PROJETO - MINI PEDIDO DE AÇAÍ DELIVERY (Nodejs e React js)
+## PROJETO - MINI PEDIDO DE AÇAÍ DELIVERY (Nodejs e React js)
 
 ### Demonstração de um Pedido
 
@@ -59,9 +59,6 @@ $ yarn start
 ## Env server
 
 ```bash
-#Clona repositório
-$ git clone https://github.com/edpedro/acaibest.git
-
 #Precisa colocar as chaves
 $ APP_SECRET=
 
